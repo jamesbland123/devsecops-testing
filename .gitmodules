@@ -1,3 +1,6 @@
 [submodule "cfn-nag/cfn_nag_examples"]
 	path = cfn-nag/cfn_nag_examples
 	url = https://github.com/stelligent/cfn_nag_examples
+[submodule "snyk-example/nodejs-goof"]
+	path = snyk-example/nodejs-goof
+	url = https://github.com/snyk-labs/nodejs-goof.git
