@@ -4,3 +4,6 @@
 [submodule "snyk-example/nodejs-goof"]
 	path = snyk-example/nodejs-goof
 	url = https://github.com/snyk-labs/nodejs-goof.git
+[submodule "gatekeeper/gatekeeper-library"]
+	path = gatekeeper/gatekeeper-library
+	url = https://github.com/open-policy-agent/gatekeeper-library.git
