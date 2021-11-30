@@ -61,7 +61,34 @@ argocd app sync guestbook
 kubectl patch svc guestbook-ui -n default -p '{"spec": {"type": "LoadBalancer"}}'
 ```
 
+# Gatekeeper example
+1. Install Gatekeeper
+```
+kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-3.7/deploy/gatekeeper.yaml
 
+# Validate pods - all services should show as running
+kubectl get pods -n gatekeeper-system
 
+# View Gatekeeper logs
+kubectl logs -l control-plane=audit-controller -n gatekeeper-system
+kubectl logs -l control-plane=controller-manager -n gatekeeper-system
+```
 
+2. Install constraint template and constraint
+```
+cd gatekeeper/priv-demo
 
+kubectl create -f ./constrainttemplate.yaml
+kubectl create -f ./constraint.yaml
+```
+
+3. Validate constraint
+```
+kubectl get constraint
+kubectl get constrainttemplate
+```
+
+4. Test constraint
+```
+kubectl create -f .test-constraint.yaml
+```
