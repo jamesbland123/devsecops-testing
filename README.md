@@ -1,19 +1,28 @@
-# devsecops-demo
-Misc DevSecOps demos 
+# Misc DevSecOps examples/demos
+All examples are for mac but can be adapted for windows desktops. 
 
-Mac
+- This repo has submodules. Clone with ```git clone --recurse-submodules```. If you forget you'll need to run ```git submodule init``` and ```git submodule update```
+
+## Hadolint - Docker security
 ```
 brew install hadolint
-
-brew install ruby brew-gem
-brew gem install cfn-nag
-
 ```
 
-Install vscode extensions for hadolint, cfn-nag, Snyk
+Install the vscode extension for hadolint and open hadolint-example Dockerfile. You might have to restart vscode, but all findings will be listed under problems.
 
+## CFN Nag - Cloud Formation security best practice scanning
+```
+brew install ruby brew-gem
+brew gem install cfn-nag
+```
 
-# Argo CD Installation
+Install vscode extensions for cfn-nag. Open cfn-nag/cfn_nag_examples/cfn/stack.yml and/or volume.yaml. Issues should be listed under problems detected.
+
+## Snyk
+Install the Snyk vscode extension and follow the instructions. Snyk should automatically scan all the files and detect issues in snyk-example/nodejs-goof.
+
+## Argo CD Installation - Deployments. 
+ArgoCD is a gitOps deployment system that can be used to automate the deployment process so running software can be tested.
 1. Install Argo CD
 ```
 kubectl create namespace argocd
@@ -24,7 +33,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 brew install argocd
 ```
 
-3. Expose the service through load balancer
+3. Optional (redirect can be used if you don't want to expose a public interface): Expose the service through load balancer
 ```
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}' 
 ```
@@ -61,7 +70,7 @@ argocd app sync guestbook
 kubectl patch svc guestbook-ui -n default -p '{"spec": {"type": "LoadBalancer"}}'
 ```
 
-# Gatekeeper example
+## Gatekeeper example
 1. Install Gatekeeper
 ```
 kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-3.7/deploy/gatekeeper.yaml
@@ -92,3 +101,5 @@ kubectl get constrainttemplate
 ```
 kubectl create -f .test-constraint.yaml
 ```
+
+5. Optional: Additional example constraints in gatekeeper/gatekeeper-library 
